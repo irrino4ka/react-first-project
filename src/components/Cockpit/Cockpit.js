@@ -19,12 +19,12 @@ const cockpit = (props) => {
     }
 
     return (
-        <Aux>
+        <div>
             <h1>{props.appTitle}</h1>
             <p className={classes.join(' ')}>Magic here</p>
             <button className = {btnClass}
             onClick={props.clicked} >Toggle Persons</button>
-        </Aux>
+    </div>
     );
 };
 
