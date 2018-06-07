@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classesCss from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
+class App extends PureComponent {
   constructor(props) {
     super(props);
     console.log('[App.js]', props);
@@ -27,11 +27,11 @@ class App extends Component {
     console.log('did mount');
   }
 
-  shouldComponentUpdate ( nextProps, nextState ) {
-    console.log( '[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState );
-    return nextState.persons !== this.state.persons ||
-    nextState.showPersons !== this.state.showPersons;
-  }
+  // shouldComponentUpdate ( nextProps, nextState ) {
+  //   console.log( '[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState );
+  //   return nextState.persons !== this.state.persons ||
+  //   nextState.showPersons !== this.state.showPersons;
+  // }
 
 
   nameChangedHandler = (event, id) => {
@@ -66,14 +66,14 @@ class App extends Component {
 
   render() {
     console.log('app inside render');
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-    }
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    // }
 
     let persons = null;
 

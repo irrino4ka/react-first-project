@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Person from './Person/Person';
 
-class Persons extends Component {
+class Persons extends PureComponent {
 
     constructor(props) {
         super(props);
@@ -16,10 +16,10 @@ class Persons extends Component {
         console.log('pe4rsons did mount');
       }
       
-    shouldComponentUpdate(nextProps, nextState) {
-        console.log('shouldCOMPONENt uPDATE', nextProps, nextState);
-        return nextProps.persons  !== this.props.persons || nextProps.changed !== this.props.changed || nextProps.clicked !== this.props.clicked;
-    }
+    // shouldComponentUpdate(nextProps, nextState) {
+    //     console.log('shouldCOMPONENt uPDATE', nextProps, nextState);
+    //     return nextProps.persons  !== this.props.persons || nextProps.changed !== this.props.changed || nextProps.clicked !== this.props.clicked;
+    // }
 
     render() {
         console.log('persons inside render');
