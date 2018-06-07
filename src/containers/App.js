@@ -9,10 +9,10 @@ class App extends Component {
     console.log('[App.js]', props);
     this.state = {
       persons: [
-        {id: '1', name: 'Max', age: 21},
-        {id: '2', name: 'Anna', age: 13},
-        {id: '3', name: 'Lolla', age: 11},
-        {id: '4', name: 'Billy', age: 10}
+        {id: 'tre1', name: 'Max', age: 21},
+        {id: 'grdtgr2', name: 'Anna', age: 13},
+        {id: 'trt3', name: 'Lolla', age: 11},
+        {id: 'rtter4', name: 'Billy', age: 10}
       ],
       otherState: 'other value',
       showPersons: false
@@ -27,6 +27,11 @@ class App extends Component {
     console.log('did mount');
   }
 
+  shouldComponentUpdate ( nextProps, nextState ) {
+    console.log( '[UPDATE App.js] Inside shouldComponentUpdate', nextProps, nextState );
+    return nextState.persons !== this.state.persons ||
+    nextState.showPersons !== this.state.showPersons;
+  }
 
 
   nameChangedHandler = (event, id) => {
@@ -78,7 +83,7 @@ class App extends Component {
               <Persons
                 persons = {this.state.persons}
                 clicked = {this.deletePersonHandler}
-                checked = {this.nameChangedHandler}
+                changed = {this.nameChangedHandler}
               />
             </div>
       );
@@ -86,6 +91,7 @@ class App extends Component {
     }
     return (
         <div className={classesCss.App}>
+        <button onClick ={ () => {this.setState({showPersons: true})}}>Show Persons </button>
         <Cockpit 
           appTitle = {this.props.title}
           showPersons={this.state.showPersons}

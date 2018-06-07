@@ -5,15 +5,24 @@ class Person extends Component {
     constructor(props) {
         super(props);
         console.log('[person.js]', props);
-      }
-    
-      componentWillMount(){
-        console.log('person will mount')
-      }
-    
-      componentDidMount() {
-        console.log('pe4rson did mount');
-      }
+    }
+
+    componentWillMount(){
+    console.log('person will mount')
+    }
+
+    componentDidMount() {
+    console.log('pe4rson did mount');
+    }
+
+    componentWillReceiveProps(nextProps) {
+        console.log('update persons', nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldCOMPONENt uPDATE', nextProps, nextState);
+        return true// nextProps.persons  !== this.props.persons;
+    }
 
     render() {
         console.log('person inside render');

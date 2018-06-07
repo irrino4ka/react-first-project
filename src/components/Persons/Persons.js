@@ -15,12 +15,17 @@ class Persons extends Component {
       componentDidMount() {
         console.log('pe4rsons did mount');
       }
+      
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('shouldCOMPONENt uPDATE', nextProps, nextState);
+        return nextProps.persons  !== this.props.persons || nextProps.changed !== this.props.changed || nextProps.clicked !== this.props.clicked;
+    }
 
     render() {
         console.log('persons inside render');
-        return  this.props.persons.map((person, key) => {
+        return  this.props.persons.map((person, index) => {
             return <Person 
-            click = {() => this.props.clicked(key)}
+            click = {() => this.props.clicked(index)}
             key={person.id}
             name = {person.name}
             age={person.age}
