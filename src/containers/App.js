@@ -1,19 +1,33 @@
 import React, { Component } from 'react';
 import classesCss from './App.css';
-import Person from './Person/Person';
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      {id: '1', name: 'Max', age: 21},
-      {id: '2', name: 'Anna', age: 13},
-      {id: '3', name: 'Lolla', age: 11},
-      {id: '4', name: 'Billy', age: 10}
-    ],
-    otherState: 'other value',
-    showPersons: false
+  constructor(props) {
+    super(props);
+    console.log('[App.js]', props);
+    this.state = {
+      persons: [
+        {id: '1', name: 'Max', age: 21},
+        {id: '2', name: 'Anna', age: 13},
+        {id: '3', name: 'Lolla', age: 11},
+        {id: '4', name: 'Billy', age: 10}
+      ],
+      otherState: 'other value',
+      showPersons: false
+    }
   }
+
+  componentWillMount(){
+    console.log('will mount')
+  }
+
+  componentDidMount() {
+    console.log('did mount');
+  }
+
+
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex( p => {
@@ -46,7 +60,7 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('app inside render');
     const style = {
       backgroundColor: 'green',
       color: 'white',
@@ -57,43 +71,27 @@ class App extends Component {
     }
 
     let persons = null;
-    let btnClass = '';
 
     if (this.state.showPersons){
       persons = (
             <div >
-              {this.state.persons.map((person, key) => {
-                return <ErrorBoundary key={person.id}>
-                 <Person 
-                click = {() => this.deletePersonHandler(key)} // this.deletePersonHandler.bind(this, key)
-                name = {person.name}
-                age={person.age}
-                changed ={(event) => this.nameChangedHandler(event, person.id)}/>
-                </ErrorBoundary>
-              })}
+              <Persons
+                persons = {this.state.persons}
+                clicked = {this.deletePersonHandler}
+                checked = {this.nameChangedHandler}
+              />
             </div>
       );
 
-      btnClass = classesCss.Red;
     }
-
-    // let classes = ['red', 'bold'].join(' ');
-    const classes = [];
-    if (this.state.persons.length <=2) {
-      classes.push(classesCss.Red);
-    }
-
-    if (this.state.persons.length <=1) {
-      classes.push(classesCss.Bold);
-    }
-
     return (
         <div className={classesCss.App}>
-          <h1>I am react file</h1>
-          <p className={classes.join(' ')}>Magic here</p>
-          <button className = {btnClass}
-            onClick={this.togglePersonHandler} >Toggle Persons</button>
-          {persons}
+        <Cockpit 
+          appTitle = {this.props.title}
+          showPersons={this.state.showPersons}
+          persons={this.state.persons}
+          clicked = {this.togglePersonHandler}/>
+            {persons}
         </div>
     );
   }
